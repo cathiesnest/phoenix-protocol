@@ -1,0 +1,1686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Phoenix Protocol | Heal. Rebuild. Rise.</title>
+  <meta name="description" content="Phoenix Protocol is for anyone who has been betrayed, ghosted, or heartbroken and is ready to come back stronger. Heal. Rebuild. Rise. Powered by CathiesNest Digital." />
+  <meta name="theme-color" content="#efe9dd" />
+
+  <meta property="og:title" content="Phoenix Protocol | Heal. Rebuild. Rise." />
+  <meta property="og:description" content="Heal your mind and heart. Rebuild your body and finances. Rise into your power." />
+  <meta property="og:type" content="website" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500&family=Mrs+Saint+Delafield&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --ink: #2f3b2c;
+      --ink-soft: #5b6555;
+      --leaf: #4a6142;
+      --glass: rgba(255, 255, 255, 0.42);
+      --glass-edge: rgba(255, 255, 255, 0.7);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "Jost", system-ui, -apple-system, "Segoe UI", sans-serif;
+      color: var(--ink);
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 16px;
+      background: #f1ece1;
+      overflow-x: hidden;
+    }
+
+    /* ---------- Background scene (all drawn in code) ---------- */
+    .scene {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse at 85% 75%, rgba(255, 255, 255, 0.85), transparent 55%),
+        linear-gradient(135deg, #f6f2e9 0%, #ece4d3 60%, #f4eee2 100%);
+    }
+
+    /* Soft window light falling across the linen */
+    .scene::before {
+      content: "";
+      position: absolute;
+      inset: -20%;
+      background: linear-gradient(
+        115deg,
+        transparent 30%,
+        rgba(255, 255, 255, 0.55) 45%,
+        transparent 60%
+      );
+    }
+
+    /* Fine linen grain */
+    .scene::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      opacity: 0.09;
+      mix-blend-mode: multiply;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .35  0 0 0 0 .3  0 0 0 0 .22  0 0 0 .6 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    }
+
+    .fronds {
+      position: absolute;
+      width: min(120vw, 900px);
+      height: min(120vw, 900px);
+      filter: blur(2.5px);
+      animation: sway 16s ease-in-out infinite alternate;
+    }
+    .fronds.tl { top: -6%; left: -8%; transform-origin: 0 0; }
+    .fronds.br { bottom: -12%; right: -14%; opacity: 0.55; transform-origin: 100% 100%; animation-duration: 20s; }
+
+    @keyframes sway {
+      from { transform: rotate(-1.4deg); }
+      to   { transform: rotate(1.4deg); }
+    }
+
+    /* ---------- Card ---------- */
+    .card {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 380px;
+      border-radius: 28px;
+      overflow: hidden;
+      background: var(--glass);
+      -webkit-backdrop-filter: blur(22px) saturate(1.1);
+      backdrop-filter: blur(22px) saturate(1.1);
+      border: 1px solid var(--glass-edge);
+      box-shadow: 0 20px 55px rgba(60, 50, 30, 0.16);
+      text-align: center;
+    }
+
+    .card-body { padding: 48px 28px 30px; }
+
+    .brand {
+      font-family: "Mrs Saint Delafield", cursive;
+      font-weight: 400;
+      font-size: clamp(3.3rem, 14vw, 4.3rem);
+      line-height: 0.95;
+    }
+
+    .tagline {
+      font-family: "Mrs Saint Delafield", cursive;
+      font-size: clamp(1.9rem, 8vw, 2.4rem);
+      color: var(--ink-soft);
+      margin-top: 10px;
+    }
+
+    .divider {
+      width: 36px;
+      height: 1px;
+      background: rgba(47, 59, 44, 0.35);
+      margin: 22px auto;
+    }
+
+    .intro {
+      margin: 0 auto 26px;
+      font-size: 0.93rem;
+      line-height: 1.6;
+      color: var(--ink-soft);
+      max-width: 290px;
+    }
+
+    .buttons { display: grid; gap: 12px; }
+
+    .btn {
+      appearance: none;
+      border: 0;
+      cursor: pointer;
+      text-decoration: none;
+      font-family: inherit;
+      font-size: 0.98rem;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+      padding: 15px 20px;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 50px;
+      transition: transform 0.15s ease, background 0.2s ease, box-shadow 0.2s ease;
+    }
+    .btn:focus-visible { outline: 3px solid #8aa57c; outline-offset: 3px; }
+    .btn:active { transform: scale(0.98); }
+
+    .btn-primary {
+      background: var(--ink);
+      color: #f8f5ee;
+      box-shadow: 0 8px 20px rgba(47, 59, 44, 0.25);
+    }
+    .btn-primary:hover { background: #3b4a37; transform: translateY(-2px); }
+
+    .btn-ghost {
+      background: rgba(255, 255, 255, 0.5);
+      color: var(--ink);
+      border: 1px solid rgba(47, 59, 44, 0.25);
+    }
+    .btn-ghost:hover { background: rgba(255, 255, 255, 0.85); transform: translateY(-2px); }
+
+    .disclosure {
+      margin-top: 16px;
+      font-size: 0.7rem;
+      color: var(--ink-soft);
+      opacity: 0.85;
+    }
+    .disclosure a { color: var(--ink); text-underline-offset: 2px; }
+
+    .wrap {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 380px;
+    }
+
+    .disclaimer {
+      margin-top: 18px;
+      padding: 22px 22px 20px;
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.34);
+      -webkit-backdrop-filter: blur(16px);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--glass-edge);
+      text-align: left;
+      scroll-margin-top: 16px;
+    }
+    .disclaimer summary {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      list-style: none;
+      min-height: 28px;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink);
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .disclaimer summary::-webkit-details-marker { display: none; }
+    .disclaimer summary::before {
+      content: "\25B6";
+      display: inline-block;
+      font-size: 0.7rem;
+      transition: transform 0.2s ease;
+    }
+    .disclaimer[open] summary::before { transform: rotate(90deg); }
+    .disclaimer[open] summary { margin-bottom: 12px; }
+    .disclaimer summary:focus-visible { outline: 3px solid #8aa57c; outline-offset: 4px; border-radius: 6px; }
+    .disclaimer p {
+      font-size: 0.76rem;
+      line-height: 1.65;
+      color: var(--ink-soft);
+    }
+    .disclaimer p + p { margin-top: 10px; }
+
+    /* ---------- Reflection activity ---------- */
+    .buttons.bottom { margin-top: 14px; }
+
+    .quiz {
+      padding: 22px 18px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.55);
+      border: 1px solid rgba(255, 255, 255, 0.85);
+      text-align: center;
+    }
+    .q-dots { display: flex; justify-content: center; gap: 6px; margin-bottom: 12px; }
+    .q-dots .dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(47, 59, 44, 0.2); }
+    .q-dots .dot.on { background: var(--ink); }
+    .q-count {
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      margin-bottom: 8px;
+    }
+    .q-note { font-size: 0.8rem; font-style: italic; color: var(--ink-soft); margin-bottom: 10px; }
+    .q-text { font-size: 1.05rem; font-weight: 500; line-height: 1.4; color: var(--ink); margin-bottom: 16px; }
+    .q-options { display: grid; gap: 8px; }
+    .q-opt {
+      font-family: inherit;
+      font-size: 0.88rem;
+      line-height: 1.4;
+      text-align: left;
+      color: var(--ink);
+      background: #fff;
+      border: 1px solid rgba(47, 59, 44, 0.2);
+      border-radius: 16px;
+      padding: 12px 14px;
+      min-height: 44px;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.15s ease;
+    }
+    .q-opt:hover { background: #f3efe5; transform: translateY(-1px); }
+    .q-opt:focus-visible { outline: 3px solid #8aa57c; outline-offset: 2px; }
+
+    .mirror { font-size: 0.88rem; line-height: 1.6; color: var(--ink-soft); }
+    .advice {
+      text-align: left;
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(47, 59, 44, 0.15);
+    }
+    .advice h3 { font-size: 1rem; font-weight: 500; margin-bottom: 8px; color: var(--ink); }
+    .advice p { font-size: 0.86rem; line-height: 1.65; color: var(--ink-soft); }
+    .advice .move { margin-top: 10px; color: var(--ink); }
+    .q-actions { display: grid; gap: 6px; margin-top: 16px; }
+    .q-link {
+      background: none;
+      border: 0;
+      font-family: inherit;
+      font-size: 0.8rem;
+      color: var(--ink-soft);
+      text-decoration: underline;
+      cursor: pointer;
+      padding: 8px;
+    }
+    .q-sign { font-family: "Mrs Saint Delafield", cursive; font-size: 1.9rem; color: var(--ink-soft); margin-top: 4px; }
+
+    /* ---------- Mood tracker ---------- */
+    .moods { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; }
+    .mood-opt {
+      font-family: inherit;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      min-height: 62px;
+      padding: 10px 2px;
+      font-size: 0.66rem;
+      color: var(--ink);
+      background: #fff;
+      border: 1px solid rgba(47, 59, 44, 0.2);
+      border-radius: 14px;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.15s ease;
+    }
+    .mood-opt .face { font-size: 1.4rem; line-height: 1; }
+    .mood-opt:hover { background: #f3efe5; transform: translateY(-1px); }
+    .mood-opt.on { background: var(--ink); color: #f8f5ee; border-color: var(--ink); }
+    .mood-opt:focus-visible { outline: 3px solid #8aa57c; outline-offset: 2px; }
+    .mood-msg { font-size: 0.86rem; line-height: 1.6; color: var(--ink-soft); margin-top: 14px; }
+    .mood-msg + .mood-msg { margin-top: 8px; }
+    .week {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 4px;
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(47, 59, 44, 0.15);
+    }
+    .day { display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 0.66rem; color: var(--ink-soft); }
+    .day .cell {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(47, 59, 44, 0.12);
+    }
+    .day.today .cell { border-color: var(--ink); }
+    .mood-foot { font-size: 0.7rem; color: var(--ink-soft); opacity: 0.8; margin-top: 12px; }
+
+    /* ---------- Mood check-in extras ---------- */
+    .today-move {
+      margin-top: 14px;
+      padding: 12px 14px;
+      border-radius: 16px;
+      background: rgba(138, 165, 124, 0.2);
+      border: 1px solid rgba(74, 97, 66, 0.2);
+    }
+    .today-move .q-count { margin-bottom: 6px; }
+    .today-move p:last-child { font-size: 0.86rem; line-height: 1.6; color: var(--ink); }
+
+    .btn-small { min-height: 44px; padding: 11px 16px; font-size: 0.88rem; margin-top: 12px; }
+
+    .breath {
+      margin-top: 12px;
+      padding: 14px 12px 8px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.85);
+      text-align: center;
+    }
+    .breath-stage { height: 124px; display: flex; align-items: center; justify-content: center; }
+    .breath-circle {
+      width: 108px;
+      height: 108px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.9), rgba(138, 165, 124, 0.55));
+      border: 1px solid rgba(74, 97, 66, 0.3);
+      transform: scale(0.6);
+    }
+    .breath-text { font-size: 1rem; font-weight: 500; color: var(--ink); margin-top: 4px; }
+    .breath-sub { font-size: 0.76rem; line-height: 1.5; color: var(--ink-soft); margin-top: 4px; }
+
+    .next-step {
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(47, 59, 44, 0.15);
+    }
+
+    /* ---------- Money Matters ---------- */
+    .money { margin-top: 14px; }
+    .nudge { font-size: 0.8rem; color: var(--ink-soft); margin-bottom: 10px; }
+    .btn-soft {
+      flex-direction: column;
+      gap: 2px;
+      padding: 13px 20px;
+      background: rgba(138, 165, 124, 0.28);
+      color: var(--ink);
+      border: 1px solid rgba(74, 97, 66, 0.3);
+    }
+    .btn-soft:hover { background: rgba(138, 165, 124, 0.42); transform: translateY(-2px); }
+    .btn-soft .btn-main { font-weight: 500; }
+    .btn-soft .btn-sub { font-size: 0.74rem; letter-spacing: 0; color: var(--ink-soft); }
+
+    /* ---------- Heal / Rebuild / Rise plan ---------- */
+    .plan {
+      text-align: left;
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(47, 59, 44, 0.15);
+    }
+    .plan .q-count { text-align: center; margin-bottom: 4px; }
+    .plan .step { display: flex; gap: 10px; align-items: flex-start; margin-top: 12px; }
+    .plan .step-tag {
+      flex: 0 0 auto;
+      min-width: 72px;
+      text-align: center;
+      font-size: 0.66rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #f8f5ee;
+      background: var(--ink);
+      border-radius: 999px;
+      padding: 5px 10px;
+      margin-top: 1px;
+    }
+    .plan .step p { font-size: 0.84rem; line-height: 1.6; color: var(--ink-soft); }
+
+    /* ---------- Phoenix Power Bank card ---------- */
+    .powerbank {
+      position: relative;
+      z-index: 1;
+      margin-top: 18px;
+      border-radius: 28px;
+      overflow: hidden;
+      background: var(--glass);
+      -webkit-backdrop-filter: blur(22px) saturate(1.1);
+      backdrop-filter: blur(22px) saturate(1.1);
+      border: 1px solid var(--glass-edge);
+      box-shadow: 0 20px 55px rgba(60, 50, 30, 0.16);
+      text-align: center;
+    }
+    .pb-art svg { display: block; width: 100%; height: auto; }
+    .pb-body { padding: 22px 22px 26px; }
+    .pb-title {
+      font-family: "Mrs Saint Delafield", cursive;
+      font-weight: 400;
+      font-size: 2.6rem;
+      line-height: 1;
+      color: var(--ink);
+      margin: 0 0 2px;
+    }
+    .pb-date { font-size: 0.78rem; color: var(--ink-soft); margin-bottom: 14px; }
+
+    .pb-activity {
+      padding: 16px 14px;
+      border-radius: 18px;
+      background: rgba(138, 165, 124, 0.2);
+      border: 1px solid rgba(74, 97, 66, 0.2);
+    }
+    .pb-tag {
+      display: inline-block;
+      font-size: 0.66rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #f8f5ee;
+      background: var(--ink);
+      border-radius: 999px;
+      padding: 4px 12px;
+      margin-bottom: 10px;
+    }
+    .pb-task { font-size: 0.96rem; line-height: 1.55; color: var(--ink); margin-bottom: 12px; }
+    .pb-link { display: inline-block; font-size: 0.78rem; color: var(--ink); text-underline-offset: 2px; margin-bottom: 4px; }
+    .pb-aff { font-size: 0.68rem; color: var(--ink-soft); opacity: 0.85; margin-bottom: 8px; }
+    .pb-done { font-size: 0.8rem; color: var(--ink-soft); margin-top: 10px; }
+    .pb-activity .btn-small { width: 100%; margin-top: 8px; }
+
+    .pb-meter { margin-top: 18px; padding-top: 16px; border-top: 1px solid rgba(47, 59, 44, 0.15); }
+    .pb-meter .q-count { margin-bottom: 12px; }
+    .pb-row {
+      display: grid;
+      grid-template-columns: 50px minmax(0, 1fr) 32px 40px;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+      text-align: left;
+    }
+    .pb-label { font-size: 0.8rem; font-weight: 500; color: var(--ink); }
+    .pb-bar {
+      position: relative;
+      display: flex;
+      gap: 3px;
+      height: 24px;
+      padding: 3px;
+      border: 1.5px solid rgba(47, 59, 44, 0.45);
+      border-radius: 7px;
+    }
+    .pb-bar::after {
+      content: "";
+      position: absolute;
+      right: -6px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 3px;
+      height: 10px;
+      border-radius: 0 2px 2px 0;
+      background: rgba(47, 59, 44, 0.45);
+    }
+    .pb-seg { flex: 1; border-radius: 3px; background: rgba(47, 59, 44, 0.1); }
+    .pb-seg.on { background: var(--leaf); }
+    .pb-row.full .pb-seg.on { background: #c9853b; }
+    .pb-count { font-size: 0.72rem; color: var(--ink-soft); text-align: right; }
+    .pb-plus {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid rgba(47, 59, 44, 0.25);
+      background: #fff;
+      color: var(--ink);
+      font-family: inherit;
+      font-size: 1.1rem;
+      line-height: 1;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.15s ease;
+    }
+    .pb-plus:hover { background: #f3efe5; transform: translateY(-1px); }
+    .pb-plus.on { background: var(--ink); color: #f8f5ee; border-color: var(--ink); }
+    .pb-plus:focus-visible { outline: 3px solid #8aa57c; outline-offset: 2px; }
+    .pb-hint { font-size: 0.72rem; line-height: 1.5; color: var(--ink-soft); margin-top: 6px; }
+    .pb-msg { font-size: 0.86rem; line-height: 1.55; color: var(--ink); margin-top: 10px; }
+
+    .pb-quote { margin-top: 18px; padding-top: 16px; border-top: 1px solid rgba(47, 59, 44, 0.15); }
+    .pb-quote .q-count { margin-bottom: 8px; }
+    .pb-quote-text { font-size: 1.02rem; line-height: 1.55; color: var(--ink); }
+
+    /* Wide screens: the Power Bank sits on the right of the main card */
+    @media (min-width: 900px) {
+      .wrap {
+        max-width: 800px;
+        display: grid;
+        grid-template-columns: 380px minmax(0, 1fr);
+        column-gap: 24px;
+        align-items: start;
+      }
+      .wrap > .card { grid-column: 1; grid-row: 1; }
+      .wrap > .disclaimer { grid-column: 1; grid-row: 2; }
+      .wrap > .powerbank { grid-column: 2; grid-row: 1 / span 2; margin-top: 0; }
+    }
+    @media (min-width: 900px) and (min-height: 800px) {
+      .wrap > .powerbank { position: sticky; top: 24px; }
+    }
+
+    .card-footer {
+      background: rgba(255, 255, 255, 0.5);
+      padding: 16px;
+      font-size: 0.8rem;
+      color: var(--ink-soft);
+      border-top: 1px solid rgba(255, 255, 255, 0.65);
+    }
+    .card-footer strong { color: var(--ink); font-weight: 500; }
+
+    /* ---------- Share panel ---------- */
+    .share-panel {
+      display: none;
+      margin-top: 14px;
+      padding: 14px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.62);
+      border: 1px solid rgba(255, 255, 255, 0.85);
+      text-align: left;
+    }
+    .share-panel.open { display: block; }
+    .share-panel p { font-size: 0.8rem; line-height: 1.5; color: var(--ink-soft); }
+    .share-links { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0 12px; }
+    .share-links a, .share-links button {
+      font-family: inherit;
+      font-size: 0.8rem;
+      color: var(--ink);
+      text-decoration: none;
+      background: #fff;
+      border: 1px solid rgba(47, 59, 44, 0.2);
+      border-radius: 999px;
+      padding: 8px 14px;
+      cursor: pointer;
+    }
+    .share-links a:hover, .share-links button:hover { background: #f3efe5; }
+
+    .toast {
+      position: fixed;
+      z-index: 5;
+      left: 50%;
+      bottom: 28px;
+      transform: translate(-50%, 30px);
+      background: var(--ink);
+      color: #fff;
+      padding: 12px 20px;
+      border-radius: 999px;
+      font-size: 0.88rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+      max-width: 90vw;
+      text-align: center;
+    }
+    .toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+    @media (prefers-reduced-motion: reduce) {
+      .fronds { animation: none; }
+      .btn, .toast { transition: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Decorative background: palm shadows drawn in code, no image files needed -->
+  <div class="scene" aria-hidden="true">
+    <svg class="fronds tl" id="frondsTL" viewBox="0 0 800 800" preserveAspectRatio="xMinYMin meet"></svg>
+    <svg class="fronds br" id="frondsBR" viewBox="0 0 800 800" preserveAspectRatio="xMaxYMax meet"></svg>
+  </div>
+
+  <div class="wrap">
+  <main class="card">
+    <div class="card-body">
+      <h1 class="brand">Phoenix Protocol</h1>
+      <p class="tagline">Heal. Rebuild. Rise.</p>
+
+      <div class="divider"></div>
+
+      <p class="intro">
+        For anyone betrayed, ghosted, or heartbroken and ready to come back
+        stronger in mind, body, heart, and wealth.
+      </p>
+
+      <div class="buttons">
+        <button class="btn btn-primary" id="startQuiz" type="button" aria-expanded="false" aria-controls="quizPanel">
+          Begin Your Reflection
+        </button>
+
+        <div class="quiz" id="quizPanel" role="region" aria-label="Healing reflection" aria-live="polite" hidden></div>
+
+        <button class="btn btn-ghost" id="openMood" type="button" aria-expanded="false" aria-controls="moodPanel">
+          Daily Mood Check-In
+        </button>
+
+        <div class="quiz" id="moodPanel" role="region" aria-label="Daily mood check-in" aria-live="polite" hidden></div>
+
+        <button class="btn btn-ghost" id="careShare" type="button" aria-expanded="false" aria-controls="sharePanel">
+          Care &amp; Share
+        </button>
+      </div>
+
+      <div class="share-panel" id="sharePanel" role="region" aria-label="Share this site">
+        <p>Save or share Phoenix Protocol with someone who needs it.</p>
+        <div class="share-links">
+          <button type="button" id="copyLink">Copy link</button>
+          <a id="shareWhatsapp" target="_blank" rel="noopener">WhatsApp</a>
+          <a id="shareFacebook" target="_blank" rel="noopener">Facebook</a>
+          <a id="shareX" target="_blank" rel="noopener">X</a>
+          <a id="shareEmail">Email</a>
+        </div>
+        <p>
+          To save it: press <strong>Ctrl + D</strong> (<strong>&#8984; + D</strong> on Mac), or on a phone
+          use your browser menu &rarr; <em>Add to Home Screen</em>.
+        </p>
+      </div>
+
+      <div class="money">
+        <p class="nudge">Healing your finances is part of healing.</p>
+        <a class="btn btn-soft" href="https://cathiesnest.github.io/money-matters/#about" target="_blank" rel="noopener noreferrer">
+          <span class="btn-main">Visit Money Matters</span>
+          <span class="btn-sub">Calm, simple steps to level up your finances</span>
+        </a>
+      </div>
+
+      <div class="buttons bottom">
+        <a class="btn btn-primary"
+           href="https://alison.com/courses/personal-development?utm_source=alison_user&utm_medium=affiliate&utm_campaign=42404117"
+           target="_blank" rel="noopener noreferrer sponsored">
+          Personal Development
+        </a>
+      </div>
+
+      <p class="disclosure">This page contains an affiliate link. <a href="#affiliate-disclaimer">Affiliate Disclaimer</a></p>
+    </div>
+
+    <div class="card-footer">
+      Powered by <strong>CathiesNest Digital</strong>
+    </div>
+  </main>
+
+  <!-- Phoenix Power Bank: right side on wide screens, stacked below on phones and tablets -->
+  <aside class="powerbank" aria-label="Phoenix Power Bank">
+    <div class="pb-art">
+      <svg viewBox="0 0 400 210" role="img" aria-label="A glowing phoenix rising with outstretched wings" preserveAspectRatio="xMidYMid slice">
+        <defs>
+          <linearGradient id="pbSky" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#f7f3ea"/>
+            <stop offset="1" stop-color="#e4dcc7"/>
+          </linearGradient>
+          <radialGradient id="pbSun" cx="50%" cy="50%" r="50%">
+            <stop offset="0" stop-color="#f3c77a" stop-opacity="0.95"/>
+            <stop offset="0.55" stop-color="#e9b768" stop-opacity="0.35"/>
+            <stop offset="1" stop-color="#e9b768" stop-opacity="0"/>
+          </radialGradient>
+          <path id="pbFeather" d="M0 0 Q48 -9 110 0 Q48 9 0 0Z"/>
+        </defs>
+
+        <rect width="400" height="210" fill="url(#pbSky)"/>
+        <circle cx="200" cy="112" r="104" fill="url(#pbSun)"/>
+
+        <!-- soft palm leaves in the corners, echoing the page background -->
+        <g fill="#4a6142" opacity="0.15">
+          <use href="#pbFeather" transform="translate(-10 14) rotate(8) scale(1.4)"/>
+          <use href="#pbFeather" transform="translate(-10 14) rotate(28) scale(1.5)"/>
+          <use href="#pbFeather" transform="translate(-10 14) rotate(48) scale(1.25)"/>
+          <use href="#pbFeather" transform="translate(410 200) rotate(-172) scale(1.4)"/>
+          <use href="#pbFeather" transform="translate(410 200) rotate(-152) scale(1.5)"/>
+          <use href="#pbFeather" transform="translate(410 200) rotate(-132) scale(1.25)"/>
+        </g>
+
+        <g transform="translate(200 120)">
+          <!-- flowing tail -->
+          <g fill="#c9853b" opacity="0.85">
+            <use href="#pbFeather" transform="rotate(90) scale(0.72)"/>
+            <use href="#pbFeather" transform="rotate(76) scale(0.66)"/>
+            <use href="#pbFeather" transform="rotate(104) scale(0.66)"/>
+          </g>
+          <g fill="#e2a24f" opacity="0.75">
+            <use href="#pbFeather" transform="rotate(62) scale(0.46)"/>
+            <use href="#pbFeather" transform="rotate(118) scale(0.46)"/>
+          </g>
+
+          <!-- wings (right wing drawn, then mirrored) -->
+          <g id="pbWing" transform="translate(6 -14)">
+            <g fill="#4a6142" opacity="0.8">
+              <use href="#pbFeather" transform="rotate(32) scale(0.8)"/>
+              <use href="#pbFeather" transform="rotate(14) scale(1.1)"/>
+              <use href="#pbFeather" transform="rotate(-6) scale(1.35)"/>
+              <use href="#pbFeather" transform="rotate(-24) scale(1.3)"/>
+              <use href="#pbFeather" transform="rotate(-42) scale(1.15)"/>
+              <use href="#pbFeather" transform="rotate(-60) scale(0.95)"/>
+              <use href="#pbFeather" transform="rotate(-76) scale(0.7)"/>
+            </g>
+            <g fill="#c9853b" opacity="0.85">
+              <use href="#pbFeather" transform="rotate(-16) scale(0.8)"/>
+              <use href="#pbFeather" transform="rotate(-34) scale(0.75)"/>
+              <use href="#pbFeather" transform="rotate(-52) scale(0.62)"/>
+            </g>
+          </g>
+          <use href="#pbWing" transform="scale(-1 1)"/>
+
+          <!-- body and head -->
+          <ellipse cx="0" cy="2" rx="13" ry="30" fill="#2f3b2c"/>
+          <circle cx="0" cy="-36" r="9" fill="#2f3b2c"/>
+          <path d="M-3 -32 L0 -25 L3 -32Z" fill="#c9853b"/>
+          <circle cx="-3.2" cy="-38" r="1.3" fill="#f7f3ea"/>
+          <circle cx="3.2" cy="-38" r="1.3" fill="#f7f3ea"/>
+          <g fill="#c9853b">
+            <use href="#pbFeather" transform="translate(0 -43) rotate(-102) scale(0.3)"/>
+            <use href="#pbFeather" transform="translate(0 -43) rotate(-78) scale(0.3)"/>
+            <use href="#pbFeather" transform="translate(0 -43) rotate(-90) scale(0.4)"/>
+          </g>
+        </g>
+
+        <!-- rising embers -->
+        <g fill="#e2a24f">
+          <circle cx="96" cy="60" r="2.2" opacity="0.7"/>
+          <circle cx="310" cy="48" r="1.8" opacity="0.6"/>
+          <circle cx="140" cy="28" r="1.6" opacity="0.5"/>
+          <circle cx="268" cy="80" r="2.4" opacity="0.6"/>
+          <circle cx="62" cy="132" r="1.6" opacity="0.5"/>
+          <circle cx="342" cy="122" r="2" opacity="0.5"/>
+        </g>
+      </svg>
+    </div>
+    <div class="pb-body" id="pbBody"></div>
+  </aside>
+
+  <details class="disclaimer" id="affiliate-disclaimer">
+    <summary>Affiliate Disclaimer</summary>
+    <p>Phoenix Protocol is powered by CathiesNest Digital and is an independent website. It is not owned, operated, sponsored, or endorsed by Alison.</p>
+    <p>Some links on this website may direct you to Alison through an affiliate link belonging to the site owner, who is a registered Alison Affiliate. The site owner may earn a commission from qualifying purchases or actions at no additional cost to you.</p>
+    <p>This is a paid referral arrangement only and does not constitute an endorsement by Alison or a partnership, agency, or employment relationship between Phoenix Protocol and Alison.</p>
+    <p>Participation in any external course, program, or assessment does not guarantee employment, income, career advancement, or any particular outcome.</p>
+  </details>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    /* ---------- Draw palm fronds ---------- */
+    (function () {
+      var NS = "http://www.w3.org/2000/svg";
+
+      function frond(svg, p0, p1, p2, n, len, color, opacity) {
+        var g = document.createElementNS(NS, "g");
+        g.setAttribute("fill", color);
+        g.setAttribute("opacity", opacity);
+
+        var stem = document.createElementNS(NS, "path");
+        stem.setAttribute("d", "M" + p0 + " Q" + p1 + " " + p2);
+        stem.setAttribute("fill", "none");
+        stem.setAttribute("stroke", color);
+        stem.setAttribute("stroke-width", "3");
+        g.appendChild(stem);
+
+        for (var i = 1; i <= n; i++) {
+          var t = i / (n + 1);
+          var x = (1 - t) * (1 - t) * p0[0] + 2 * (1 - t) * t * p1[0] + t * t * p2[0];
+          var y = (1 - t) * (1 - t) * p0[1] + 2 * (1 - t) * t * p1[1] + t * t * p2[1];
+          var tx = 2 * (1 - t) * (p1[0] - p0[0]) + 2 * t * (p2[0] - p1[0]);
+          var ty = 2 * (1 - t) * (p1[1] - p0[1]) + 2 * t * (p2[1] - p1[1]);
+          var ang = Math.atan2(ty, tx) * 180 / Math.PI;
+          var L = len * (1 - 0.62 * t);
+          var w = L * 0.075;
+
+          [-1, 1].forEach(function (side) {
+            var leaf = document.createElementNS(NS, "path");
+            leaf.setAttribute(
+              "d",
+              "M0 0 Q" + (L * 0.5) + " " + (-w) + " " + L + " 0 Q" + (L * 0.5) + " " + w + " 0 0Z"
+            );
+            leaf.setAttribute(
+              "transform",
+              "translate(" + x.toFixed(1) + " " + y.toFixed(1) + ") rotate(" + (ang + side * 58).toFixed(1) + ")"
+            );
+            g.appendChild(leaf);
+          });
+        }
+        svg.appendChild(g);
+      }
+
+      var leaf = "#4a6142";
+      var tl = document.getElementById("frondsTL");
+      frond(tl, [-60, 130], [280, 20], [640, 250], 28, 200, leaf, 0.42);
+      frond(tl, [-60, 30], [160, -40], [430, 90], 22, 160, leaf, 0.3);
+      frond(tl, [40, -50], [110, 300], [330, 540], 24, 180, leaf, 0.34);
+
+      var br = document.getElementById("frondsBR");
+      frond(br, [860, 690], [560, 790], [260, 640], 26, 190, leaf, 0.4);
+      frond(br, [860, 820], [700, 600], [520, 430], 22, 170, leaf, 0.3);
+    })();
+
+    /* ---------- Care & Share ---------- */
+    (function () {
+      var shareBtn = document.getElementById("careShare");
+      var panel = document.getElementById("sharePanel");
+      var toast = document.getElementById("toast");
+      var copyBtn = document.getElementById("copyLink");
+
+      var url = window.location.href.split("#")[0];
+      var title = "Phoenix Protocol | Heal. Rebuild. Rise.";
+      var text = "Phoenix Protocol: for anyone ready to heal, rebuild, and rise. Powered by CathiesNest Digital.";
+
+      function showToast(msg) {
+        toast.textContent = msg;
+        toast.classList.add("show");
+        clearTimeout(showToast._t);
+        showToast._t = setTimeout(function () { toast.classList.remove("show"); }, 2400);
+      }
+
+      function fallbackCopy() {
+        var ta = document.createElement("textarea");
+        ta.value = url;
+        ta.style.position = "fixed";
+        ta.style.opacity = "0";
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand("copy"); showToast("Link copied."); }
+        catch (e) { showToast("Copy this link: " + url); }
+        document.body.removeChild(ta);
+      }
+
+      function copyLink() {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(url).then(
+            function () { showToast("Link copied. Share it with someone who needs it."); },
+            fallbackCopy
+          );
+        } else {
+          fallbackCopy();
+        }
+      }
+
+      var enc = encodeURIComponent;
+      document.getElementById("shareWhatsapp").href = "https://wa.me/?text=" + enc(text + " " + url);
+      document.getElementById("shareFacebook").href = "https://www.facebook.com/sharer/sharer.php?u=" + enc(url);
+      document.getElementById("shareX").href = "https://twitter.com/intent/tweet?text=" + enc(text) + "&url=" + enc(url);
+      document.getElementById("shareEmail").href = "mailto:?subject=" + enc(title) + "&body=" + enc(text + "\n\n" + url);
+
+      function openPanel() {
+        panel.classList.add("open");
+        shareBtn.setAttribute("aria-expanded", "true");
+      }
+
+      shareBtn.addEventListener("click", function () {
+        if (navigator.share) {
+          navigator.share({ title: title, text: text, url: url }).catch(function (err) {
+            if (err && err.name !== "AbortError") openPanel();
+          });
+        } else {
+          copyLink();
+          openPanel();
+        }
+      });
+
+      copyBtn.addEventListener("click", copyLink);
+    })();
+
+    /* ---------- Reflection activity ---------- */
+    (function () {
+      var startBtn = document.getElementById("startQuiz");
+      var panel = document.getElementById("quizPanel");
+
+      // Each round draws 5 of these 10 question sets at random.
+      var QUESTIONS = [
+        { q: "When you think about what happened, what hits you first?", a: [
+          ["The replay. I keep going over every moment.", "mind"],
+          ["An ache in my chest I can't explain.", "heart"],
+          ["I'm exhausted. My whole body feels heavy.", "body"],
+          ["Everything it cost me, and not only emotionally.", "wealth"] ] },
+        { q: "What does a hard night look like for you?", a: [
+          ["Checking their page and wondering why.", "mind"],
+          ["Crying, or feeling completely numb.", "heart"],
+          ["Barely sleeping and barely eating.", "body"],
+          ["Lying awake worrying about bills and what's next.", "wealth"] ] },
+        { q: "What would you tell your past self?", a: [
+          ["You saw the signs. Trust your gut.", "mind"],
+          ["You deserved to be loved better.", "heart"],
+          ["Take care of yourself first.", "body"],
+          ["Don't give away your money or your peace so easily.", "wealth"] ] },
+        { q: "When someone is kind to you now, what happens inside?", a: [
+          ["I wonder what they really want.", "mind"],
+          ["I want to believe it, but I'm scared.", "heart"],
+          ["I'm too tired to even respond.", "body"],
+          ["I just want enough stability to finally breathe.", "wealth"] ] },
+        { q: "When you look in the mirror lately, what do you see?", a: [
+          ["Someone who has been doubting themselves.", "mind"],
+          ["Someone who has been hurt.", "heart"],
+          ["Someone who stopped taking care of themselves.", "body"],
+          ["Someone who is tired of struggling.", "wealth"] ] },
+        { q: "What would feel like a real win this week?", a: [
+          ["Not checking up on them.", "mind"],
+          ["Letting myself cry or laugh for real.", "heart"],
+          ["A full night's sleep and a proper meal.", "body"],
+          ["Setting aside even a little money for me.", "wealth"] ] },
+        { q: "Who do you lean on right now?", a: [
+          ["Nobody. I'm stuck alone in my head.", "mind"],
+          ["I want to, but I don't want to be a burden.", "heart"],
+          ["I keep busy so I don't have to.", "body"],
+          ["I'm handling everything alone, money stress included.", "wealth"] ] },
+        { q: "What do you miss the most?", a: [
+          ["The version of the story I believed in.", "mind"],
+          ["Feeling loved and chosen.", "heart"],
+          ["Feeling like myself, healthy and light.", "body"],
+          ["Feeling secure and stable.", "wealth"] ] },
+        { q: "What are you most afraid of?", a: [
+          ["Trusting the wrong person again.", "mind"],
+          ["Never feeling loved again.", "heart"],
+          ["Staying stuck like this.", "body"],
+          ["Starting over with nothing.", "wealth"] ] },
+        { q: "If you could change one thing by next month, what would it be?", a: [
+          ["I'd stop overthinking everything.", "mind"],
+          ["I'd feel lighter in my heart.", "heart"],
+          ["I'd have more energy and feel good in my skin.", "body"],
+          ["I'd have a plan for my money and my future.", "wealth"] ] },
+        { q: "What does 'moving on' look like to you right now?", a: [
+          ["Finally stopping the 'what if' and 'why' questions.", "mind"],
+          ["Thinking of them without it hurting.", "heart"],
+          ["Waking up and actually wanting to get out of bed.", "body"],
+          ["Having my own life, my own money, my own plans.", "wealth"] ] },
+        { q: "What did this experience take from you the most?", a: [
+          ["My trust in my own judgment.", "mind"],
+          ["My ability to believe in love.", "heart"],
+          ["My energy and my glow.", "body"],
+          ["My sense of security.", "wealth"] ] },
+        { q: "When a song, a place, or a memory brings them back, what happens?", a: [
+          ["My mind starts replaying everything.", "mind"],
+          ["My heart sinks all over again.", "heart"],
+          ["My body tenses up and I feel drained.", "body"],
+          ["I think about all the time and money I put in.", "wealth"] ] },
+        { q: "What's the one thing you keep putting off for yourself?", a: [
+          ["Letting go of the answers I never got.", "mind"],
+          ["Letting someone in, or letting myself feel.", "heart"],
+          ["Rest, a checkup, or simply taking care of me.", "body"],
+          ["Facing my money and building something of my own.", "wealth"] ] },
+        { q: "How does your own company feel right now?", a: [
+          ["My thoughts are too loud.", "mind"],
+          ["It's lonely, even when people are around.", "heart"],
+          ["Restless. I can't settle, or I can't get up.", "body"],
+          ["I'd feel better if my future felt more secure.", "wealth"] ] },
+        { q: "What does your inner voice say on a bad day?", a: [
+          ["You should have known better.", "mind"],
+          ["Maybe I'm just not lovable enough.", "heart"],
+          ["Look at how you've let yourself go.", "body"],
+          ["You're behind. You'll never catch up.", "wealth"] ] },
+        { q: "Which sounds most like what you need right now?", a: [
+          ["Clarity, so I can stop second-guessing.", "mind"],
+          ["Comfort, so I can feel safe again.", "heart"],
+          ["Energy, so I can feel like me again.", "body"],
+          ["A fresh start, so I can feel in control.", "wealth"] ] },
+        { q: "What small thing would make today feel lighter?", a: [
+          ["A break from replaying the past.", "mind"],
+          ["A hug, or someone saying 'I'm proud of you.'", "heart"],
+          ["A hot shower, fresh air, and a good meal.", "body"],
+          ["One less thing to worry about financially.", "wealth"] ] },
+        { q: "If healing had a feeling this month, what would it be?", a: [
+          ["Quiet. No more noise in my head.", "mind"],
+          ["Warmth. Feeling cared for again.", "heart"],
+          ["Fresh air. Breathing deeper.", "body"],
+          ["A calm bank account and a plan.", "wealth"] ] },
+        { q: "What do you wish someone had told you when it ended?", a: [
+          ["It wasn't your fault for believing in them.", "mind"],
+          ["It's okay to grieve, even if they didn't deserve it.", "heart"],
+          ["Be gentle with your body. It's grieving too.", "body"],
+          ["You will stand on your own two feet again.", "wealth"] ] }
+      ];
+
+      var MIRROR = {
+        heart: "Your answers say your heart is carrying the most right now. That is not weakness. It means you loved sincerely.",
+        mind: "Your answers say your mind is working overtime, trying to make sense of something that may never fully make sense.",
+        body: "Your answers say your body is asking for care. Heartbreak lives in the body too, and it deserves some tenderness.",
+        wealth: "Your answers say you're craving stability. Getting your footing back is a real part of healing, not a side issue."
+      };
+
+      var ADVICE = {
+        heart: [
+          { t: "Grief is allowed to be messy.", p: "You are not weak for still missing someone who hurt you. You're missing what you hoped it would be, and that is a real loss. Let it come in waves instead of fighting it.", m: "Write one letter you will never send, then keep it in a drawer, not in their inbox." },
+          { t: "Being left says nothing about your worth.", p: "Ghosting and betrayal show how someone else handles hard things, not how much you are worth. People who can't be honest will leave honest people confused. That is their weakness to carry.", m: "Say it out loud once today: 'I was enough. They just couldn't meet me there.'" },
+          { t: "Let the kindness start with you.", p: "Before you hope anyone else will treat you gently, try it yourself. Talk to yourself the way you would talk to your best friend on their worst day.", m: "The next time your inner voice gets harsh, answer it with one kind sentence." },
+          { t: "You don't have to be okay yet.", p: "Healing is not a straight road. A good day followed by a bad one doesn't mean you're going backwards. It means you're human and still mending.", m: "Make today's only goal to be gentle with yourself." },
+          { t: "Open the door slowly.", p: "Trust can come back, but it can come back at your pace. You don't owe anyone quick access to your heart. Let people earn it in small moments first.", m: "Notice who keeps small promises this week. That is where trust starts." },
+          { t: "Make room for people who feel safe.", p: "After being hurt, some people feel pulled toward the same kind of chaos. Healing means getting used to calm. If someone is steady and kind, it may feel boring at first, but that is what safe feels like.", m: "Spend time this week with one person who leaves you feeling calm, not anxious." },
+          { t: "Celebrate the small wins.", p: "Some days, getting dressed, eating, or not answering a message is a victory. You don't have to wait for a big breakthrough to be proud of yourself.", m: "Write down one small thing you did well today and say thank you to yourself." }
+        ],
+        mind: [
+          { t: "Stop re-reading the old story.", p: "You may never get the closure you're waiting for, and that's okay, because you can give it to yourself. Most of the answers you're chasing are already in how you were treated.", m: "Write down three things that already told you the truth, then close the notebook." },
+          { t: "Your gut was never the problem.", p: "Betrayal makes people doubt themselves. But believing the best in someone is not a flaw. Keep your good heart and just add a little more patience before you trust.", m: "Next time something feels off, give it a day before you decide anything." },
+          { t: "Overthinking is care with nowhere to go.", p: "When your mind replays everything, it's trying to protect you. Give those thoughts somewhere to land, like a walk, a journal page, or a voice note to yourself.", m: "Set aside 10 minutes to worry on purpose. When it ends, do something with your hands." },
+          { t: "Mute. Step back. Breathe.", p: "Checking on someone who walked away only reopens the wound. Silence is not childish. It is protection while you heal.", m: "Mute or hide one thing today that keeps pulling your eyes backward." },
+          { t: "Let the old you rest.", p: "That earlier version of you made the best choices they could with what they knew. Thank them, and let them rest. You are allowed to know better now.", m: "Finish this sentence in your notes: 'Now I know ____.'" },
+          { t: "Fill the empty space with something that's yours.", p: "When someone leaves, they leave a quiet gap in your day. Put something of your own in it, like a hobby, a class, a podcast, or a small project. Your mind heals faster when it has somewhere good to go.", m: "Pick one hobby or curiosity and give it 20 minutes today." },
+          { t: "Trust is rebuilt with yourself first.", p: "Keep one small promise to yourself every day, like drinking your water or going to bed on time. Each promise you keep rebuilds your self-trust, and that makes it easier to trust the right people later.", m: "Make one tiny promise to yourself right now and keep it before bed." }
+        ],
+        body: [
+          { t: "Start with the basics.", p: "Sleep, water, and one real meal will do more for you than a big pep talk. Your body has been carrying this heartbreak too, and it needs looking after.", m: "Go to bed 30 minutes earlier tonight and leave your phone in another room." },
+          { t: "Move the feeling out.", p: "Pain gets stuck in your shoulders, chest, and jaw. Walking, stretching, or dancing around the kitchen helps it move through instead of sitting there.", m: "Take a 15-minute walk today without scrolling." },
+          { t: "Dress like someone who's coming back.", p: "You don't need a total makeover. Fresh sheets, a haircut, or an outfit that fits well tells your mind a new season has begun.", m: "Choose one thing to refresh this week: your hair, your room, or one outfit." },
+          { t: "Sunlight is free medicine.", p: "Step outside in the morning, even when you don't feel like it. Light and fresh air lift your mood more than most of us give them credit for.", m: "Tomorrow morning, drink a glass of water and stand in the sun for five minutes." },
+          { t: "Rest is not laziness.", p: "You're recovering from something real. Rest without guilt, and let the to-do list wait. You can't pour into your future from an empty cup.", m: "Pick one thing you can drop today without anything falling apart." },
+          { t: "Eat like you matter.", p: "Heartbreak can make you skip meals or eat on autopilot. Feeding yourself something warm and nourishing is a way of telling yourself you're worth the effort.", m: "Cook or order one proper meal today and eat it sitting down, without scrolling." },
+          { t: "Let your breath do the heavy lifting.", p: "When sadness or worry spikes, slow breathing helps your body settle. It's simple, free, and you can do it anywhere.", m: "Breathe in for 4, out for 6, five times. Repeat whenever your chest feels tight today." }
+        ],
+        wealth: [
+          { t: "Look at the numbers, kindly.", p: "Heartbreak often leaves money in a mess, whether bills were shared, money was spent on someone else, or you simply stopped caring about your own goals. You don't have to fix it all today. You just have to look.", m: "Open your bank app tonight and view your balance. Awareness is the first step." },
+          { t: "Build your own safety net.", p: "No one is coming to rescue you, and that can be a powerful place to start. Even a small amount saved says you are choosing yourself.", m: "Set aside any amount today, however small, and call it 'My Fresh Start.'" },
+          { t: "Never let your life hang on someone else's yes.", p: "Your own income, skills, and savings mean you can walk away from anything that doesn't serve you. Independence is a quiet kind of freedom.", m: "Write down one skill you could earn from, and one step to grow it this month." },
+          { t: "Spend on healing, not on proving.", p: "Don't buy things to show them you're doing great. Spend on what truly makes your life better: a class, a good meal, a counselor, a new skill.", m: "Before any purchase this week, ask: is this for healing or for impressing?" },
+          { t: "Make a simple plan.", p: "You don't need a perfect budget. You need a direction. Three short lists will do: what comes in, what goes out, and what you want next.", m: "Write down one money goal for the next 90 days." },
+          { t: "Cut the leftover ties.", p: "Shared subscriptions, old accounts, joint plans, gifts you're still paying off. Cleaning these up gives you back your money and your peace of mind. It's also a quiet way of closing the chapter.", m: "List anything still tied to your past and cancel or close one today." },
+          { t: "Treat your future self like someone you love.", p: "Every small thing you do for your money now, whether saving, learning, or earning a little more, is a gift to the version of you who will be free from all this. Rebuilding happens in small, steady steps.", m: "Learn one new money skill this week. A short video or article is enough." }
+        ]
+      };
+
+      // A short Heal / Rebuild / Rise plan, matched to what the answers showed.
+      var PLAN = {
+        heart: {
+          heal: ["Let yourself feel it for ten minutes a day, then gently move on to something kind.", "Tell one trusted person the real version of how you're doing, not the 'I'm fine' version."],
+          rebuild: ["Rebuild your self-respect by keeping small promises to yourself and walking away from anything that makes you feel small.", "Rebuild your circle. Spend more time with people who show up the same way every time."],
+          rise: ["Rise by choosing yourself first, then open your heart again at your own pace.", "Rise by letting your story become your strength. What you survived proves you can love bravely again."]
+        },
+        mind: {
+          heal: ["Stop trying to understand them and start trying to understand what you need.", "Write it all out once, every angry, sad, confused thought, then close the page. You don't have to carry it in your head."],
+          rebuild: ["Rebuild your confidence with proof. List the times you handled hard things well.", "Rebuild your boundaries. Decide what you will and won't accept, and write it down."],
+          rise: ["Rise by trusting the lessons, not the fear. You know your worth better now.", "Rise by setting one goal that has nothing to do with them, and chasing it."]
+        },
+        body: {
+          heal: ["Heal by slowing down. Sleep, water, and sunlight come before everything else.", "Heal by moving your body gently every day. Even a short walk counts."],
+          rebuild: ["Rebuild your energy with simple routines: regular sleep, regular meals, a little movement.", "Rebuild how you feel in your skin. Refresh one thing that makes you feel like yourself again."],
+          rise: ["Rise by treating your body like a friend you're proud to walk through life with.", "Rise by taking up space. Stand tall, dress for yourself, and walk into rooms like you belong."]
+        },
+        wealth: {
+          heal: ["Heal your money stress by facing it. A clear look at the numbers is calmer than the fear.", "Heal by forgiving yourself for money spent or lost during that time. You did what you could with what you knew."],
+          rebuild: ["Rebuild with a simple plan: what comes in, what goes out, and a small amount saved every time.", "Rebuild by learning one skill or growing one source of income that is fully yours."],
+          rise: ["Rise by building a life where no one else holds your financial future.", "Rise by dreaming again. Name one goal for the next year and take the first step."]
+        }
+      };
+
+      function pickOne(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+
+      function planHtml(theme) {
+        var p = PLAN[theme];
+        return '<div class="plan"><p class="q-count">Your Heal. Rebuild. Rise. plan</p>' +
+          '<div class="step"><span class="step-tag">Heal</span><p>' + esc(pickOne(p.heal)) + "</p></div>" +
+          '<div class="step"><span class="step-tag">Rebuild</span><p>' + esc(pickOne(p.rebuild)) + "</p></div>" +
+          '<div class="step"><span class="step-tag">Rise</span><p>' + esc(pickOne(p.rise)) + "</p></div></div>";
+      }
+
+      var picked, step, score, lastKey = "";
+
+      function shuffle(arr) {
+        var a = arr.slice();
+        for (var i = a.length - 1; i > 0; i--) {
+          var j = Math.floor(Math.random() * (i + 1));
+          var t = a[i]; a[i] = a[j]; a[j] = t;
+        }
+        return a;
+      }
+
+      function esc(s) {
+        return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+      }
+
+      function start() {
+        picked = shuffle(QUESTIONS).slice(0, 5);
+        step = 0;
+        score = { heart: 0, mind: 0, body: 0, wealth: 0 };
+        startBtn.style.display = "none";
+        startBtn.setAttribute("aria-expanded", "true");
+        panel.hidden = false;
+        renderQuestion();
+      }
+
+      function close() {
+        panel.hidden = true;
+        panel.innerHTML = "";
+        startBtn.style.display = "";
+        startBtn.setAttribute("aria-expanded", "false");
+      }
+
+      function renderQuestion() {
+        var item = picked[step];
+        var dots = "";
+        for (var i = 0; i < 5; i++) {
+          dots += '<span class="dot' + (i <= step ? " on" : "") + '"></span>';
+        }
+        var html = '<div class="q-dots" aria-hidden="true">' + dots + "</div>" +
+          '<p class="q-count">Question ' + (step + 1) + " of 5</p>" +
+          (step === 0 ? '<p class="q-note">Take a breath. There are no wrong answers.</p>' : "") +
+          '<h2 class="q-text">' + esc(item.q) + '</h2><div class="q-options">';
+        shuffle(item.a).forEach(function (o) {
+          html += '<button type="button" class="q-opt" data-theme="' + o[1] + '">' + esc(o[0]) + "</button>";
+        });
+        html += "</div>";
+        panel.innerHTML = html;
+
+        var opts = panel.querySelectorAll(".q-opt");
+        for (var k = 0; k < opts.length; k++) {
+          opts[k].addEventListener("click", function () {
+            score[this.getAttribute("data-theme")]++;
+            step++;
+            if (step < 5) { renderQuestion(); } else { renderResult(); }
+          });
+        }
+        panel.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      }
+
+      function topTheme() {
+        var best = -1, list = [];
+        for (var k in score) {
+          if (score[k] > best) { best = score[k]; list = [k]; }
+          else if (score[k] === best) { list.push(k); }
+        }
+        return list[Math.floor(Math.random() * list.length)];
+      }
+
+      function pickAdvice(theme) {
+        var pool = ADVICE[theme], idx;
+        do { idx = Math.floor(Math.random() * pool.length); }
+        while (pool.length > 1 && lastKey === theme + idx);
+        lastKey = theme + idx;
+        return pool[idx];
+      }
+
+      function adviceHtml(a) {
+        return '<div class="advice"><h3>' + esc(a.t) + "</h3><p>" + esc(a.p) + "</p>" +
+          '<p class="move"><strong>Small move for today:</strong> ' + esc(a.m) + "</p></div>";
+      }
+
+      function renderResult() {
+        var theme = topTheme();
+        panel.innerHTML =
+          '<p class="q-count">Your Phoenix Reflection</p>' +
+          '<p class="mirror">' + esc(MIRROR[theme]) + "</p>" +
+          '<div id="adviceSlot">' + adviceHtml(pickAdvice(theme)) + "</div>" + planHtml(theme) +
+          '<div class="q-actions">' +
+          '<button type="button" class="btn btn-ghost" id="moreWisdom">Another word of wisdom</button>' +
+          '<button type="button" class="q-link" id="restartQuiz">Start over with new questions</button>' +
+          '<button type="button" class="q-link" id="closeQuiz">Close</button>' +
+          "</div>" +
+          '<p class="q-sign">Heal. Rebuild. Rise.</p>';
+
+        document.getElementById("moreWisdom").addEventListener("click", function () {
+          var themes = ["heart", "mind", "body", "wealth"];
+          var t = themes[Math.floor(Math.random() * themes.length)];
+          document.getElementById("adviceSlot").innerHTML = adviceHtml(pickAdvice(t));
+        });
+        document.getElementById("restartQuiz").addEventListener("click", start);
+        document.getElementById("closeQuiz").addEventListener("click", close);
+        panel.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      }
+
+      startBtn.addEventListener("click", start);
+    })();
+
+    /* ---------- Open the disclaimer when its link is clicked ---------- */
+    (function () {
+      var box = document.getElementById("affiliate-disclaimer");
+      var links = document.querySelectorAll('a[href="#affiliate-disclaimer"]');
+      for (var i = 0; i < links.length; i++) {
+        links[i].addEventListener("click", function () { box.open = true; });
+      }
+    })();
+
+    /* ---------- Mood tracker ---------- */
+    (function () {
+      var openBtn = document.getElementById("openMood");
+      var panel = document.getElementById("moodPanel");
+      var KEY = "pp_moods";
+
+      var MOODS = [
+        { v: 1, e: "😢", l: "Hurting" },
+        { v: 2, e: "😔", l: "Heavy" },
+        { v: 3, e: "😐", l: "Okay" },
+        { v: 4, e: "🙂", l: "Hopeful" },
+        { v: 5, e: "🔥", l: "Strong" }
+      ];
+
+      var MSG = {
+        1: "Thank you for being honest. Hurting days are part of healing, not proof that you're failing. Be extra gentle with yourself today.",
+        2: "Heavy days happen. You don't have to push through everything. One small kind thing for yourself is enough today.",
+        3: "Okay is a good place to be. Steady days build the ground for the brighter ones.",
+        4: "Hope is showing up, and that matters. Do one thing today that your future self will thank you for.",
+        5: "Look at you rising. Hold on to this feeling so you can remember it on the heavier days."
+      };
+
+      var data = {};
+      try { data = JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) { data = {}; }
+
+      function save() {
+        try { localStorage.setItem(KEY, JSON.stringify(data)); } catch (e) { /* stays in memory only */ }
+      }
+
+      function pad(n) { return n < 10 ? "0" + n : "" + n; }
+      function keyFor(d) { return d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate()); }
+      function daysAgo(n) { var d = new Date(); d.setDate(d.getDate() - n); return d; }
+      function moodFor(v) { for (var i = 0; i < MOODS.length; i++) { if (MOODS[i].v === v) return MOODS[i]; } return null; }
+
+      /* --- 1. Today's small move, matched to the mood --- */
+      var MOVES = {
+        1: [
+          "Drink a glass of water slowly, and sit down while you do it.",
+          "Step outside for five minutes and let the fresh air reach your face.",
+          "Text one safe person, even just 'rough day.' You don't have to explain.",
+          "Wrap yourself in something soft and rest for ten minutes with no screen."
+        ],
+        2: [
+          "Take a warm shower and put on something clean and comfortable.",
+          "Eat something simple and warm, sitting down, without scrolling.",
+          "Do one tiny task, like making your bed, and then stop there.",
+          "Walk for ten minutes, even slowly, even around the house."
+        ],
+        3: [
+          "Tidy one small corner of your space and notice how it feels.",
+          "Take a short walk and notice three things you like along the way.",
+          "Write tomorrow's plan in three short lines.",
+          "Do something kind for future you, like prepping a meal or laying out your clothes."
+        ],
+        4: [
+          "Start the thing you've been putting off, just for ten minutes.",
+          "Write down one goal you want to reach this month.",
+          "Reach out to someone you've been meaning to reconnect with.",
+          "Do one thing today that the new you would do."
+        ],
+        5: [
+          "Take on the task you've been avoiding while you have this energy.",
+          "Move your body and enjoy it. Dance, stretch, or go for a run.",
+          "Send an encouraging message to someone who might be hurting.",
+          "Write down what's working so you can read it on harder days."
+        ]
+      };
+      var moveCache = {};
+
+      function moveHtml(v) {
+        if (!moveCache[v]) { moveCache[v] = MOVES[v][Math.floor(Math.random() * MOVES[v].length)]; }
+        return '<div class="today-move"><p class="q-count">Today\'s small move</p><p>' + moveCache[v] + "</p></div>";
+      }
+
+      /* --- 2. One-minute breathing moment (for Hurting and Heavy days) --- */
+      var breathTimer = null;
+
+      function stopBreath() {
+        if (breathTimer) { clearTimeout(breathTimer); breathTimer = null; }
+      }
+
+      function breathButtonHtml() {
+        return '<button type="button" class="btn btn-ghost btn-small" id="startBreath">Take a one-minute breathing moment</button>';
+      }
+
+      function bindBreath() {
+        var b = document.getElementById("startBreath");
+        if (b) {
+          b.addEventListener("click", function () {
+            startBreathing(document.getElementById("breathSlot"));
+          });
+        }
+      }
+
+      function startBreathing(slot) {
+        stopBreath();
+        var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        slot.innerHTML =
+          '<div class="breath">' +
+          '<div class="breath-stage"><div class="breath-circle" id="breathCircle" aria-hidden="true"></div></div>' +
+          '<p class="breath-text" id="breathText">Get comfortable</p>' +
+          '<p class="breath-sub" id="breathSub">In through your nose, out slowly through your mouth.</p>' +
+          '<button type="button" class="q-link" id="stopBreath">Stop</button></div>';
+
+        var circle = document.getElementById("breathCircle");
+        var text = document.getElementById("breathText");
+        var sub = document.getElementById("breathSub");
+        var stopBtn = document.getElementById("stopBreath");
+        var cycles = 0, TOTAL = 6; // 6 rounds of 10 seconds = one minute
+
+        function setCircle(scale, secs) {
+          circle.style.transition = reduce ? "none" : "transform " + secs + "s ease-in-out";
+          circle.style.transform = "scale(" + scale + ")";
+        }
+
+        function inhale() {
+          if (cycles >= TOTAL) { finish(); return; }
+          text.textContent = "Breathe in...";
+          setCircle(1, 4);
+          breathTimer = setTimeout(exhale, 4000);
+        }
+
+        function exhale() {
+          text.textContent = "Breathe out slowly...";
+          setCircle(0.6, 6);
+          breathTimer = setTimeout(function () { cycles++; inhale(); }, 6000);
+        }
+
+        function finish() {
+          breathTimer = null;
+          text.textContent = "Well done.";
+          sub.textContent = "Notice how your body feels now. You can do this again anytime.";
+          setCircle(0.8, 1.5);
+          stopBtn.textContent = "Done";
+        }
+
+        circle.style.transition = "none";
+        circle.style.transform = "scale(0.6)";
+        breathTimer = setTimeout(inhale, 700);
+
+        stopBtn.addEventListener("click", function () {
+          stopBreath();
+          slot.innerHTML = breathButtonHtml();
+          bindBreath();
+        });
+      }
+
+      /* --- 7. A next step that fits how they feel --- */
+      var MM_URL = "https://cathiesnest.github.io/money-matters/#about";
+      var PD_URL = "https://alison.com/courses/personal-development?utm_source=alison_user&utm_medium=affiliate&utm_campaign=42404117";
+
+      function nextStepHtml(v) {
+        // Hurting and Heavy days get comfort only, with no links.
+        if (v === 3) {
+          return '<div class="next-step"><p class="nudge">A calm money plan can lift a lot of weight.</p>' +
+            '<a class="btn btn-soft" href="' + MM_URL + '" target="_blank" rel="noopener noreferrer">' +
+            '<span class="btn-main">Visit Money Matters</span>' +
+            '<span class="btn-sub">Calm, simple steps to level up your finances</span></a></div>';
+        }
+        if (v >= 4) {
+          return '<div class="next-step"><p class="nudge">Use this energy to learn something new.</p>' +
+            '<a class="btn btn-soft" href="' + PD_URL + '" target="_blank" rel="noopener noreferrer sponsored">' +
+            '<span class="btn-main">Personal Development</span>' +
+            '<span class="btn-sub">Explore a course at your own pace</span></a>' +
+            '<p class="mood-foot">Affiliate link. See the Affiliate Disclaimer below.</p></div>';
+        }
+        return "";
+      }
+
+      function trendText() {
+        var vals = [];
+        for (var i = 6; i >= 0; i--) {
+          var v = data[keyFor(daysAgo(i))];
+          if (v) vals.push(v);
+        }
+        if (vals.length < 2) return "";
+        var first = vals[0], last = vals[vals.length - 1];
+        if (last > first) return "Compared with earlier this week, you're trending upward. Keep going.";
+        if (last === first) return "Steady days count too. You're still showing up for yourself.";
+        return "Some days are heavier than others. That's part of healing, not a step backward.";
+      }
+
+      function supportNote() {
+        if (data[keyFor(daysAgo(0))] === 1 && data[keyFor(daysAgo(1))] === 1 && data[keyFor(daysAgo(2))] === 1) {
+          return "You've been hurting for a few days in a row. If it ever feels like too much, please reach out to someone you trust or a local support line. You don't have to carry it alone.";
+        }
+        return "";
+      }
+
+      function render() {
+        stopBreath();
+        var todayKey = keyFor(new Date());
+        var cur = data[todayKey];
+
+        var html = '<p class="q-count">Daily check-in</p>' +
+          '<h2 class="q-text">How are you feeling today?</h2><div class="moods">';
+        MOODS.forEach(function (m) {
+          html += '<button type="button" class="mood-opt' + (cur === m.v ? " on" : "") + '" data-v="' + m.v + '" aria-pressed="' + (cur === m.v) + '">' +
+            '<span class="face" aria-hidden="true">' + m.e + "</span><span>" + m.l + "</span></button>";
+        });
+        html += "</div>";
+
+        if (cur) {
+          html += '<p class="mood-msg">' + MSG[cur] + "</p>";
+          var t = trendText();
+          if (t) html += '<p class="mood-msg">' + t + "</p>";
+          var s = supportNote();
+          if (s) html += '<p class="mood-msg">' + s + "</p>";
+          html += moveHtml(cur);
+          if (cur <= 2) html += '<div id="breathSlot">' + breathButtonHtml() + "</div>";
+          html += nextStepHtml(cur);
+        } else {
+          html += '<p class="mood-msg">Tap the one that feels closest. No judgment here.</p>';
+        }
+
+        html += '<div class="week" aria-label="Your last 7 days">';
+        var letters = ["S", "M", "T", "W", "T", "F", "S"];
+        for (var i = 6; i >= 0; i--) {
+          var d = daysAgo(i);
+          var m = moodFor(data[keyFor(d)]);
+          html += '<div class="day' + (i === 0 ? " today" : "") + '"><span class="cell">' + (m ? m.e : "·") + "</span><span>" + letters[d.getDay()] + "</span></div>";
+        }
+        html += "</div>";
+
+        html += '<p class="mood-foot">Saved privately on this device only. You can change today\'s mood anytime.</p>' +
+          '<div class="q-actions"><button type="button" class="q-link" id="closeMood">Close</button></div>';
+
+        panel.innerHTML = html;
+        bindBreath();
+
+        var opts = panel.querySelectorAll(".mood-opt");
+        for (var k = 0; k < opts.length; k++) {
+          opts[k].addEventListener("click", function () {
+            data[keyFor(new Date())] = parseInt(this.getAttribute("data-v"), 10);
+            save();
+            render();
+            var on = panel.querySelector(".mood-opt.on");
+            if (on) on.focus();
+          });
+        }
+        document.getElementById("closeMood").addEventListener("click", close);
+      }
+
+      function open() {
+        panel.hidden = false;
+        openBtn.style.display = "none";
+        openBtn.setAttribute("aria-expanded", "true");
+        render();
+        panel.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      }
+
+      function close() {
+        stopBreath();
+        panel.hidden = true;
+        panel.innerHTML = "";
+        openBtn.style.display = "";
+        openBtn.setAttribute("aria-expanded", "false");
+      }
+
+      openBtn.addEventListener("click", open);
+    })();
+
+    /* ---------- Phoenix Power Bank ---------- */
+    (function () {
+      var body = document.getElementById("pbBody");
+      if (!body) return;
+
+      var KEY = "pp_powerbank";
+      var MAX = 5; // segments per battery
+      var MM_URL = "https://cathiesnest.github.io/money-matters/#about";
+      var PD_URL = "https://alison.com/courses/personal-development?utm_source=alison_user&utm_medium=affiliate&utm_campaign=42404117";
+
+      var AREAS = [
+        { k: "mind", l: "Mind" },
+        { k: "body", l: "Body" },
+        { k: "heart", l: "Heart" },
+        { k: "wealth", l: "Wealth" }
+      ];
+
+      // One activity a day. The day decides the battery and the activity, so it changes daily.
+      var ACTIVITIES = {
+        mind: [
+          { t: "Write down one thought that keeps looping, then write what you would tell a friend who had it." },
+          { t: "Mute or unfollow one thing that keeps pulling you backward." },
+          { t: "Spend 10 minutes learning something new that has nothing to do with the past.", link: "pd" },
+          { t: "Write three things you now know about your worth." },
+          { t: "Put your phone away for one hour and notice how your mind feels." },
+          { t: "Write down one boundary you will keep this week." },
+          { t: "Read or listen to something uplifting for 10 minutes." }
+        ],
+        body: [
+          { t: "Take a 15-minute walk without your phone." },
+          { t: "Drink a full glass of water now, and another with your next meal." },
+          { t: "Stretch for five minutes. Start with your neck and shoulders." },
+          { t: "Go to bed 30 minutes earlier tonight." },
+          { t: "Eat one proper meal sitting down, without scrolling." },
+          { t: "Step outside for five minutes of sunlight or fresh air." },
+          { t: "Dance to one song you love, all the way through." }
+        ],
+        heart: [
+          { t: "Text someone who makes you feel safe and say hello." },
+          { t: "Write one kind sentence to yourself and put it where you will see it." },
+          { t: "Let yourself cry, rest, or laugh today without judging it." },
+          { t: "Write an unsent letter to the old you, with love." },
+          { t: "Do one small thing today just because it makes you smile." },
+          { t: "Thank someone who showed up for you." },
+          { t: "Say out loud: 'I am worthy of steady love.'" }
+        ],
+        wealth: [
+          { t: "Open your bank app and look at your balance, without judgment.", link: "mm" },
+          { t: "Set aside any amount, even the smallest, into savings.", link: "mm" },
+          { t: "List your regular expenses and circle one you can reduce.", link: "mm" },
+          { t: "Cancel one subscription you no longer need.", link: "mm" },
+          { t: "Write down one money goal for the next 90 days.", link: "mm" },
+          { t: "Spend 10 minutes learning one new money or career skill.", link: "mm" },
+          { t: "List one way you could earn a little extra this month.", link: "mm" }
+        ]
+      };
+
+      var QUOTES = [
+        "You are not starting over. You are starting from experience.",
+        "Healing is not a straight line, and that's okay.",
+        "What left was never yours to keep.",
+        "You can be soft and still be strong.",
+        "Rest is part of rising.",
+        "Your peace is worth protecting.",
+        "Small steps still move you forward.",
+        "You survived the fire. Now you get to fly.",
+        "Closure is something you can give yourself.",
+        "Be as patient with yourself as you are with others.",
+        "Your worth was never up for negotiation.",
+        "Today's effort is tomorrow's strength.",
+        "You are allowed to outgrow what hurt you.",
+        "Not every ending is a loss. Some are a rescue.",
+        "Take your power back one day at a time.",
+        "The right people never make you earn basic kindness.",
+        "Strong is not the absence of tears. It's getting up anyway.",
+        "You are rebuilding, and that takes time.",
+        "Protect your energy the way you protect your savings.",
+        "Your next chapter doesn't need their permission.",
+        "Glow from the inside. It lasts longer."
+      ];
+
+      function pad(n) { return n < 10 ? "0" + n : "" + n; }
+      function keyFor(d) { return d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate()); }
+      function dayNumber(d) { return Math.floor(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()) / 86400000); }
+      function weekStart(d) {
+        var x = new Date(d.getFullYear(), d.getMonth(), d.getDate());
+        x.setDate(x.getDate() - ((x.getDay() + 6) % 7)); // Monday
+        return keyFor(x);
+      }
+      function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
+
+      var state = load();
+
+      function load() {
+        var s = null;
+        try { s = JSON.parse(localStorage.getItem(KEY)); } catch (e) { s = null; }
+        if (!s || typeof s !== "object" || !s.days) { s = { week: "", days: {} }; }
+        return s;
+      }
+
+      function save() {
+        try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) { /* stays in memory only */ }
+      }
+
+      // Batteries refill every Monday
+      function ensureWeek() {
+        var wk = weekStart(new Date());
+        if (state.week !== wk) { state = { week: wk, days: {} }; save(); }
+      }
+
+      function points() {
+        var pts = { mind: 0, body: 0, heart: 0, wealth: 0 };
+        for (var d in state.days) {
+          var e = state.days[d];
+          if (e.act && pts[e.act] !== undefined) pts[e.act]++;
+          if (e.boost) { for (var k in e.boost) { if (e.boost[k] && pts[k] !== undefined) pts[k]++; } }
+        }
+        for (var a in pts) { if (pts[a] > MAX) pts[a] = MAX; }
+        return pts;
+      }
+
+      function linkHtml(kind) {
+        if (kind === "mm") {
+          return '<a class="pb-link" href="' + MM_URL + '" target="_blank" rel="noopener noreferrer">Need ideas? Visit Money Matters</a>';
+        }
+        if (kind === "pd") {
+          return '<a class="pb-link" href="' + PD_URL + '" target="_blank" rel="noopener noreferrer sponsored">Explore a course on Personal Development</a>' +
+            '<p class="pb-aff">Affiliate link. See the Affiliate Disclaimer below.</p>';
+        }
+        return "";
+      }
+
+      function render(focusSel) {
+        ensureWeek();
+        var now = new Date();
+        var key = keyFor(now);
+        var n = dayNumber(now);
+        var area = AREAS[n % 4];
+        var list = ACTIVITIES[area.k];
+        var act = list[Math.floor(n / 4) % list.length];
+        var quote = QUOTES[n % QUOTES.length];
+        var today = state.days[key] || {};
+        var doneAct = today.act === area.k;
+        var pts = points();
+
+        var dateLabel = now.toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric" });
+
+        var html = '<p class="q-count">Phoenix Power Bank</p>' +
+          '<h2 class="pb-title">Today\'s Activity</h2>' +
+          '<p class="pb-date">' + esc(dateLabel) + "</p>" +
+          '<div class="pb-activity"><span class="pb-tag">' + area.l + "</span>" +
+          '<p class="pb-task">' + esc(act.t) + "</p>" + linkHtml(act.link) +
+          '<button type="button" class="btn btn-primary btn-small" id="pbDone" aria-pressed="' + doneAct + '">' +
+          (doneAct ? "Done. Tap to undo" : "I did it") + "</button>" +
+          (doneAct ? '<p class="pb-done">Nice work. Your ' + area.l + " battery just charged.</p>" : "") +
+          "</div>";
+
+        var rows = "", total = 0, fullCount = 0;
+        AREAS.forEach(function (a) {
+          var p = pts[a.k];
+          total += p;
+          if (p >= MAX) fullCount++;
+          var boosted = !!(today.boost && today.boost[a.k]);
+          var segs = "";
+          for (var i = 0; i < MAX; i++) { segs += '<span class="pb-seg' + (i < p ? " on" : "") + '"></span>'; }
+          rows += '<div class="pb-row' + (p >= MAX ? " full" : "") + '">' +
+            '<span class="pb-label">' + a.l + "</span>" +
+            '<span class="pb-bar" role="img" aria-label="' + a.l + " battery, " + p + " of " + MAX + '">' + segs + "</span>" +
+            '<span class="pb-count">' + p + "/" + MAX + "</span>" +
+            '<button type="button" class="pb-plus' + (boosted ? " on" : "") + '" data-area="' + a.k + '" aria-pressed="' + boosted + '" ' +
+            'aria-label="Add a power-up for ' + a.l + ' today">' + (boosted ? "&#10003;" : "+") + "</button></div>";
+        });
+
+        var msg;
+        if (fullCount === AREAS.length) { msg = "Fully charged. You did that."; }
+        else if (fullCount > 0) { msg = "A battery is full already. Keep going, you're glowing."; }
+        else if (total === 0) { msg = "Your batteries are waiting. Start with today's activity."; }
+        else { msg = "Every point counts. You're charging up, one small step at a time."; }
+
+        html += '<div class="pb-meter"><p class="q-count">Your power bank this week</p>' + rows +
+          '<p class="pb-hint">Tap + when you do something good for that area. Batteries refill every Monday.</p>' +
+          '<p class="pb-msg">' + msg + "</p></div>" +
+          '<div class="pb-quote"><p class="q-count">Quote of the day</p>' +
+          '<p class="pb-quote-text">&ldquo;' + esc(quote) + "&rdquo;</p></div>";
+
+        body.innerHTML = html;
+
+        document.getElementById("pbDone").addEventListener("click", function () {
+          var d = state.days[key] || (state.days[key] = {});
+          d.act = d.act === area.k ? null : area.k;
+          save();
+          render("#pbDone");
+        });
+
+        var plus = body.querySelectorAll(".pb-plus");
+        for (var k = 0; k < plus.length; k++) {
+          plus[k].addEventListener("click", function () {
+            var ak = this.getAttribute("data-area");
+            var d = state.days[key] || (state.days[key] = {});
+            d.boost = d.boost || {};
+            d.boost[ak] = !d.boost[ak];
+            save();
+            render('.pb-plus[data-area="' + ak + '"]');
+          });
+        }
+
+        if (focusSel) {
+          var el = body.querySelector(focusSel);
+          if (el) el.focus();
+        }
+      }
+
+      render();
+    })();
+  </script>
+</body>
+</html>
