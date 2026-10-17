@@ -172,6 +172,24 @@
     }
     .btn-ghost:hover { background: rgba(255, 255, 255, 0.85); transform: translateY(-2px); }
 
+    /* Care & Share: a touch of gold and sage */
+    .btn-care {
+      flex-direction: column;
+      gap: 2px;
+      padding: 13px 20px;
+      color: var(--ink);
+      background: linear-gradient(135deg, rgba(138, 165, 124, 0.42) 0%, rgba(255, 255, 255, 0.8) 52%, rgba(214, 178, 104, 0.42) 100%);
+      border: 1px solid rgba(184, 146, 62, 0.75);
+      box-shadow: 0 8px 20px rgba(184, 146, 62, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.75);
+    }
+    .btn-care:hover {
+      background: linear-gradient(135deg, rgba(138, 165, 124, 0.58) 0%, rgba(255, 255, 255, 0.88) 52%, rgba(214, 178, 104, 0.58) 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px rgba(184, 146, 62, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    }
+    .btn-care .btn-main { font-weight: 500; }
+    .btn-care .btn-sub { font-size: 0.72rem; letter-spacing: 0.01em; color: var(--ink-soft); overflow-wrap: anywhere; }
+
     .disclosure {
       margin-top: 16px;
       font-size: 0.7rem;
@@ -188,7 +206,7 @@
     }
 
     .disclaimer {
-      margin-top: 18px;
+      margin-top: 12px;
       padding: 22px 22px 20px;
       border-radius: 22px;
       background: rgba(255, 255, 255, 0.34);
@@ -419,6 +437,84 @@
     }
     .plan .step p { font-size: 0.84rem; line-height: 1.6; color: var(--ink-soft); }
 
+    /* ---------- Phoenix Journal ---------- */
+    .journal { text-align: left; }
+    .journal .q-count { text-align: center; }
+    .j-title {
+      font-family: "Mrs Saint Delafield", cursive;
+      font-weight: 400;
+      font-size: 2.7rem;
+      line-height: 1;
+      text-align: center;
+      color: var(--ink);
+      margin: 0;
+    }
+    .j-date { text-align: center; font-size: 0.78rem; color: var(--ink-soft); margin-bottom: 4px; }
+    .j-label { display: block; font-size: 0.82rem; font-weight: 500; line-height: 1.45; color: var(--ink); margin: 16px 0 6px; }
+    .j-stages { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+    .j-stage {
+      font-family: inherit;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      min-height: 64px;
+      padding: 8px 2px;
+      font-size: 0.7rem;
+      color: var(--ink);
+      background: #fff;
+      border: 1px solid rgba(47, 59, 44, 0.2);
+      border-radius: 14px;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.15s ease;
+    }
+    .j-stage .face { font-size: 1.35rem; line-height: 1; }
+    .j-stage small { font-size: 0.6rem; color: var(--ink-soft); }
+    .j-stage:hover { background: #f3efe5; transform: translateY(-1px); }
+    .j-stage.on { background: var(--ink); color: #f8f5ee; border-color: var(--ink); }
+    .j-stage.on small { color: #dfe7da; }
+    .j-stage:focus-visible { outline: 3px solid #8aa57c; outline-offset: 2px; }
+
+    .j-promptrow { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; margin-top: 16px; }
+    .j-promptrow .j-label { margin: 0; flex: 1; }
+    .j-promptrow .q-link { flex: 0 0 auto; padding: 2px 4px; min-height: 32px; white-space: nowrap; }
+
+    .j-paper, .j-input {
+      display: block;
+      width: 100%;
+      font-family: inherit;
+      font-size: 1rem; /* 16px keeps phones from zooming in */
+      color: var(--ink);
+      border: 1px solid rgba(47, 59, 44, 0.2);
+      border-radius: 14px;
+      background-color: #fffdf8;
+      padding: 10px 12px;
+    }
+    .j-paper {
+      margin-top: 8px;
+      min-height: 172px;
+      resize: vertical;
+      line-height: 28px;
+      padding-top: 8px;
+      padding-bottom: 8px;
+      background-image: repeating-linear-gradient(to bottom, transparent 0, transparent 27px, rgba(74, 97, 66, 0.17) 27px, rgba(74, 97, 66, 0.17) 28px);
+      background-attachment: local;
+    }
+    .j-paper::placeholder, .j-input::placeholder { color: rgba(91, 101, 85, 0.7); }
+    .j-paper:focus-visible, .j-input:focus-visible { outline: 3px solid #8aa57c; outline-offset: 2px; }
+    .journal .pb-status { text-align: center; }
+    .journal .pb-save { text-align: center; }
+
+    .j-past { margin-top: 16px; padding-top: 12px; border-top: 1px solid rgba(47, 59, 44, 0.15); }
+    .j-past summary { cursor: pointer; font-size: 0.82rem; color: var(--ink-soft); min-height: 32px; display: flex; align-items: center; }
+    .j-entry { margin-top: 8px; padding: 10px 12px; border-radius: 14px; background: rgba(255, 255, 255, 0.65); }
+    .j-entry-head { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 4px; }
+    .j-entry p { font-size: 0.84rem; line-height: 1.55; color: var(--ink); white-space: pre-wrap; overflow-wrap: anywhere; }
+    .j-entry .j-meta { color: var(--ink-soft); margin-top: 4px; font-size: 0.78rem; }
+    .j-foot { margin-top: 8px; text-align: center; }
+    .j-clear { margin-top: 12px; }
+
     /* ---------- Phoenix Power Bank card ---------- */
     .powerbank {
       position: relative;
@@ -567,6 +663,7 @@
         display: grid;
         grid-template-columns: 380px minmax(0, 1fr);
         column-gap: 24px;
+        grid-template-rows: auto 1fr;
         align-items: start;
       }
       .wrap > .card { grid-column: 1; grid-row: 1; }
@@ -671,8 +768,16 @@
 
         <div class="quiz" id="moodPanel" role="region" aria-label="Daily mood check-in" aria-live="polite" hidden></div>
 
-        <button class="btn btn-ghost" id="careShare" type="button" aria-expanded="false" aria-controls="sharePanel">
-          Care &amp; Share
+        <button class="btn btn-ghost" id="openJournal" type="button" aria-expanded="false" aria-controls="journalPanel">
+          My Phoenix Journal
+        </button>
+
+        <div class="quiz journal" id="journalPanel" role="region" aria-label="Phoenix journal" hidden></div>
+
+        <button class="btn btn-care" id="careShare" type="button" aria-expanded="false" aria-controls="sharePanel"
+                data-link="https://cathiesnest.github.io/phoenix-protocol/">
+          <span class="btn-main">Care &amp; Share</span>
+          <span class="btn-sub">cathiesnest.github.io/phoenix-protocol</span>
         </button>
       </div>
 
@@ -715,6 +820,14 @@
     </div>
   </main>
 
+  <details class="disclaimer" id="affiliate-disclaimer">
+    <summary>Affiliate Disclaimer</summary>
+    <p>Phoenix Protocol is powered by CathiesNest Digital and is an independent website. It is not owned, operated, sponsored, or endorsed by Alison.</p>
+    <p>Some links on this website may direct you to Alison through an affiliate link belonging to the site owner, who is a registered Alison Affiliate. The site owner may earn a commission from qualifying purchases or actions at no additional cost to you.</p>
+    <p>This is a paid referral arrangement only and does not constitute an endorsement by Alison or a partnership, agency, or employment relationship between Phoenix Protocol and Alison.</p>
+    <p>Participation in any external course, program, or assessment does not guarantee employment, income, career advancement, or any particular outcome.</p>
+  </details>
+
   <!-- Phoenix Power Bank: right side on wide screens, stacked below on phones and tablets -->
   <aside class="powerbank" aria-label="Phoenix Power Bank">
     <div class="pb-art">
@@ -723,13 +836,6 @@
     <div class="pb-body" id="pbBody"></div>
   </aside>
 
-  <details class="disclaimer" id="affiliate-disclaimer">
-    <summary>Affiliate Disclaimer</summary>
-    <p>Phoenix Protocol is powered by CathiesNest Digital and is an independent website. It is not owned, operated, sponsored, or endorsed by Alison.</p>
-    <p>Some links on this website may direct you to Alison through an affiliate link belonging to the site owner, who is a registered Alison Affiliate. The site owner may earn a commission from qualifying purchases or actions at no additional cost to you.</p>
-    <p>This is a paid referral arrangement only and does not constitute an endorsement by Alison or a partnership, agency, or employment relationship between Phoenix Protocol and Alison.</p>
-    <p>Participation in any external course, program, or assessment does not guarantee employment, income, career advancement, or any particular outcome.</p>
-  </details>
   </div>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
@@ -795,7 +901,7 @@
       var toast = document.getElementById("toast");
       var copyBtn = document.getElementById("copyLink");
 
-      var url = window.location.href.split("#")[0];
+      var url = shareBtn.getAttribute("data-link") || "https://cathiesnest.github.io/phoenix-protocol/";
       var title = "Phoenix Protocol | Heal. Rebuild. Rise.";
       var text = "Phoenix Protocol: for anyone ready to heal, rebuild, and rise. Powered by CathiesNest Digital.";
 
@@ -1890,6 +1996,341 @@
       }
 
       render();
+    })();
+
+    /* ---------- Phoenix Journal (saved only on this device) ---------- */
+    (function () {
+      var openBtn = document.getElementById("openJournal");
+      var panel = document.getElementById("journalPanel");
+      if (!openBtn || !panel) return;
+
+      var KEY = "pp_journal";
+      var STAGES = [
+        { k: "ashes", e: "🌫️", l: "Ashes", d: "Hurting" },
+        { k: "ember", e: "🕯️", l: "Ember", d: "Healing" },
+        { k: "flame", e: "🔥", l: "Flame", d: "Rebuilding" },
+        { k: "flight", e: "🦅", l: "Flight", d: "Rising" }
+      ];
+      var PROMPTS = [
+        "Today I'm letting go of...",
+        "Something I did today that my future self will thank me for...",
+        "A text I will never send, written here instead...",
+        "If my healing had a theme song today, it would be... because...",
+        "Three words for how I feel right now, and why...",
+        "The part of me I'm most proud of right now is...",
+        "What I'd tell my best friend if they were in my shoes...",
+        "One thing I'm done explaining to anyone...",
+        "A tiny joy I noticed today...",
+        "The version of me I'm becoming looks like...",
+        "What I need more of this week, and what I need less of...",
+        "A boundary I kept (or want to keep) and why it matters...",
+        "If money worries disappeared for one day, I would...",
+        "My body is asking me for...",
+        "Dear old me, here's what I know now...",
+        "What made me smile today, even for a second..."
+      ];
+
+      function pad(n) { return n < 10 ? "0" + n : "" + n; }
+      function keyFor(d) { return d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate()); }
+      function dateOf(key) { var p = key.split("-"); return new Date(parseInt(p[0], 10), parseInt(p[1], 10) - 1, parseInt(p[2], 10)); }
+      function dayNumber(d) { return Math.floor(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()) / 86400000); }
+      function longDate(key) { return dateOf(key).toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric", year: "numeric" }); }
+      function shortDate(key) { return dateOf(key).toLocaleDateString(undefined, { month: "short", day: "numeric" }); }
+      function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
+      function stageOf(k) { for (var i = 0; i < STAGES.length; i++) { if (STAGES[i].k === k) return STAGES[i]; } return null; }
+
+      var store = load();
+      var confirming = false;
+
+      function load() {
+        var s = null;
+        try { s = JSON.parse(localStorage.getItem(KEY)); } catch (e) { s = null; }
+        if (!s || typeof s !== "object" || !s.entries || typeof s.entries !== "object") { s = { entries: {} }; }
+        return s;
+      }
+      function save() {
+        try { localStorage.setItem(KEY, JSON.stringify(store)); } catch (e) { /* stays in memory only */ }
+      }
+
+      function hasContent(e) {
+        return !!(e && ((e.t && e.t.trim()) || (e.w && e.w.trim()) || (e.g && e.g.trim()) || e.s));
+      }
+      function contentKeys() {
+        var keys = [];
+        for (var k in store.entries) { if (hasContent(store.entries[k])) keys.push(k); }
+        keys.sort().reverse();
+        return keys;
+      }
+
+      function entryText(key, e) {
+        var lines = [longDate(key)];
+        var st = stageOf(e.s);
+        if (st) lines.push("Phoenix stage: " + st.l + " (" + st.d + ")");
+        if (e.p) lines.push("Prompt: " + e.p);
+        if (e.t && e.t.trim()) { lines.push(""); lines.push(e.t.trim()); }
+        if ((e.w && e.w.trim()) || (e.g && e.g.trim())) lines.push("");
+        if (e.w && e.w.trim()) lines.push("One small win: " + e.w.trim());
+        if (e.g && e.g.trim()) lines.push("Grateful for: " + e.g.trim());
+        return lines.join("\n");
+      }
+
+      function journalText() {
+        var out = ["PHOENIX PROTOCOL: MY JOURNAL", "Heal. Rebuild. Rise.", "Powered by CathiesNest Digital",
+          "(Private. Written on my own device.)", ""];
+        contentKeys().forEach(function (k) {
+          out.push("----------------------------------------");
+          out.push(entryText(k, store.entries[k]));
+          out.push("");
+        });
+        return out.join("\n");
+      }
+
+      function pickKey() {
+        var t = keyFor(new Date());
+        if (hasContent(store.entries[t])) return t;
+        var ks = contentKeys();
+        return ks.length ? ks[0] : null;
+      }
+
+      // Email drafts are kept short because many mail apps cut off long links.
+      function mailtoFor() {
+        var k = pickKey();
+        if (!k) return "mailto:";
+        var e = store.entries[k];
+        var subject = "My Phoenix Journal: " + shortDate(k);
+        var base = "mailto:?subject=" + encodeURIComponent(subject) + "&body=";
+        var foot = "\n\nHeal. Rebuild. Rise.\nPhoenix Protocol, powered by CathiesNest Digital";
+        function build(text, noteOn) {
+          var c = { s: e.s, p: e.p, t: text, w: e.w, g: e.g };
+          return "My Phoenix Journal\n\n" + entryText(k, c) +
+            (noteOn ? "\n\n[Shortened for email. Download your journal to keep the full entry.]" : "") + foot;
+        }
+        var LIMIT = 1900, text = e.t || "", cut = false;
+        while (text.length > 0 && (base + encodeURIComponent(build(text, cut))).length > LIMIT) {
+          text = text.slice(0, Math.floor(text.length * 0.85));
+          cut = true;
+        }
+        if (cut && text.length) text = text.replace(/\s+\S*$/, "") + "...";
+        return base + encodeURIComponent(build(text, cut));
+      }
+
+      function canShareFiles() {
+        try {
+          if (!navigator.share || !navigator.canShare || typeof File === "undefined") return false;
+          return navigator.canShare({ files: [new File(["x"], "x.txt", { type: "text/plain" })] });
+        } catch (e) { return false; }
+      }
+
+      function fileBlob() {
+        return new Blob(["﻿" + journalText().replace(/\n/g, "\r\n")], { type: "text/plain;charset=utf-8" });
+      }
+      function fileName() { return "phoenix-journal-" + keyFor(new Date()) + ".txt"; }
+
+      function render() {
+        var now = new Date();
+        var key = keyFor(now);
+        var e = store.entries[key] || {};
+        var prompt = e.p || PROMPTS[dayNumber(now) % PROMPTS.length];
+        var share = canShareFiles();
+
+        var chips = "";
+        STAGES.forEach(function (s) {
+          chips += '<button type="button" class="j-stage' + (e.s === s.k ? " on" : "") + '" data-stage="' + s.k + '" aria-pressed="' + (e.s === s.k) + '">' +
+            '<span class="face" aria-hidden="true">' + s.e + "</span><span>" + s.l + "</span><small>" + s.d + "</small></button>";
+        });
+
+        var html = '<p class="q-count">My Phoenix Journal</p>' +
+          '<h2 class="j-title">Dear me,</h2>' +
+          '<p class="j-date">' + esc(longDate(key)) + "</p>" +
+          '<span class="j-label" id="jStageLabel">Where are you on your phoenix journey today?</span>' +
+          '<div class="j-stages" role="group" aria-labelledby="jStageLabel">' + chips + "</div>" +
+          '<div class="j-promptrow"><label class="j-label" for="jText" id="jPrompt">' + esc(prompt) + "</label>" +
+          '<button type="button" class="q-link" id="jShuffle">New prompt</button></div>' +
+          '<textarea id="jText" class="j-paper" rows="6" maxlength="3000" placeholder="Write whatever comes. Nobody is reading this but you."></textarea>' +
+          '<label class="j-label" for="jWin">One small win today</label>' +
+          '<input id="jWin" class="j-input" type="text" maxlength="200" placeholder="Even getting out of bed counts" autocomplete="off">' +
+          '<label class="j-label" for="jGrat">I\'m grateful for</label>' +
+          '<input id="jGrat" class="j-input" type="text" maxlength="200" placeholder="Something or someone" autocomplete="off">' +
+          '<p class="pb-status" id="jStatus" role="status" aria-live="polite"></p>' +
+          '<div class="pb-save" id="jKeep" hidden><p class="q-count">Keep your journal</p>' +
+          '<div class="pb-save-btns">' +
+          '<button type="button" class="btn btn-primary btn-small" id="jDownload">Download my journal</button>' +
+          (share ? '<button type="button" class="btn btn-ghost btn-small" id="jShare">Share or save to phone</button>' : "") +
+          '<a class="btn btn-ghost btn-small" id="jEmail" href="mailto:">Email it to myself</a></div>' +
+          '<p class="pb-privacy">Private by design. Your journal is saved only on this device, and nothing is sent to or stored by us. ' +
+          "The email button only opens a draft in your own mail app.</p></div>" +
+          '<div id="jPastSlot"></div>' +
+          '<div class="j-foot" id="jFoot"></div>';
+
+        panel.innerHTML = html;
+        document.getElementById("jText").value = e.t || "";
+        document.getElementById("jWin").value = e.w || "";
+        document.getElementById("jGrat").value = e.g || "";
+        renderPast();
+        renderFoot();
+        refreshKeep();
+        bind();
+      }
+
+      function renderPast() {
+        var slot = document.getElementById("jPastSlot");
+        var today = keyFor(new Date());
+        var ks = contentKeys().filter(function (k) { return k !== today; }).slice(0, 10);
+        if (!ks.length) { slot.innerHTML = ""; return; }
+        var h = '<details class="j-past"><summary>Look back at past entries (' + ks.length + ")</summary>";
+        ks.forEach(function (k) {
+          var e = store.entries[k], st = stageOf(e.s);
+          h += '<div class="j-entry"><p class="j-entry-head">' + esc(shortDate(k)) + (st ? " &middot; " + st.e + " " + st.l : "") + "</p>";
+          if (e.p) h += '<p class="j-meta">' + esc(e.p) + "</p>";
+          if (e.t && e.t.trim()) h += "<p>" + esc(e.t.trim()) + "</p>";
+          if (e.w && e.w.trim()) h += '<p class="j-meta">Small win: ' + esc(e.w.trim()) + "</p>";
+          if (e.g && e.g.trim()) h += '<p class="j-meta">Grateful for: ' + esc(e.g.trim()) + "</p>";
+          h += "</div>";
+        });
+        slot.innerHTML = h + "</details>";
+      }
+
+      function renderFoot() {
+        var foot = document.getElementById("jFoot");
+        if (confirming) {
+          foot.innerHTML = '<div class="pb-confirm j-clear" role="group" aria-label="Confirm clearing your journal">' +
+            "<p>Clear your whole journal from this device? This can't be undone. Download it first if you want to keep it.</p>" +
+            '<div class="pb-confirm-btns">' +
+            '<button type="button" class="btn btn-primary btn-small" id="jClearYes">Yes, clear it</button>' +
+            '<button type="button" class="btn btn-ghost btn-small" id="jClearNo">Keep it</button></div></div>';
+        } else {
+          var clearBtn = contentKeys().length ? '<button type="button" class="q-link" id="jClear">Clear my journal</button>' : "";
+          foot.innerHTML = clearBtn + '<button type="button" class="q-link" id="jClose">Close</button>';
+        }
+      }
+
+      function refreshKeep() {
+        var keep = document.getElementById("jKeep");
+        if (!keep) return;
+        var any = contentKeys().length > 0;
+        keep.hidden = !any;
+        var em = document.getElementById("jEmail");
+        if (em && any) em.setAttribute("href", mailtoFor());
+      }
+
+      function entry() {
+        var key = keyFor(new Date());
+        return store.entries[key] || (store.entries[key] = {});
+      }
+
+      function saved() {
+        save();
+        refreshKeep();
+        renderFoot();
+        bindFoot();
+        var st = document.getElementById("jStatus");
+        if (st) st.textContent = "Saved on this device.";
+      }
+
+      function bindFoot() {
+        var close = document.getElementById("jClose");
+        if (close) close.addEventListener("click", closePanel);
+        var clr = document.getElementById("jClear");
+        if (clr) clr.addEventListener("click", function () { confirming = true; renderFoot(); bindFoot(); var n = document.getElementById("jClearNo"); if (n) n.focus(); });
+        var no = document.getElementById("jClearNo");
+        if (no) no.addEventListener("click", function () { confirming = false; renderFoot(); bindFoot(); var c = document.getElementById("jClear"); if (c) c.focus(); });
+        var yes = document.getElementById("jClearYes");
+        if (yes) yes.addEventListener("click", function () {
+          store = { entries: {} };
+          try { localStorage.removeItem(KEY); } catch (e) { /* nothing to remove */ }
+          confirming = false;
+          render();
+          var st = document.getElementById("jStatus");
+          if (st) st.textContent = "Your journal is cleared. A fresh page, ready when you are.";
+        });
+      }
+
+      function bind() {
+        var stageBtns = panel.querySelectorAll(".j-stage");
+        for (var i = 0; i < stageBtns.length; i++) {
+          stageBtns[i].addEventListener("click", function () {
+            var k = this.getAttribute("data-stage");
+            var e = entry();
+            e.s = e.s === k ? "" : k;
+            var all = panel.querySelectorAll(".j-stage");
+            for (var j = 0; j < all.length; j++) {
+              var on = all[j].getAttribute("data-stage") === e.s;
+              all[j].classList.toggle("on", on);
+              all[j].setAttribute("aria-pressed", on ? "true" : "false");
+            }
+            saved();
+          });
+        }
+
+        function field(id, prop) {
+          document.getElementById(id).addEventListener("input", function () {
+            entry()[prop] = this.value;
+            saved();
+          });
+        }
+        field("jText", "t"); field("jWin", "w"); field("jGrat", "g");
+
+        document.getElementById("jShuffle").addEventListener("click", function () {
+          var e = entry();
+          var current = document.getElementById("jPrompt").textContent;
+          var next = current;
+          while (PROMPTS.length > 1 && next === current) { next = PROMPTS[Math.floor(Math.random() * PROMPTS.length)]; }
+          e.p = next;
+          document.getElementById("jPrompt").textContent = next;
+          save();
+          refreshKeep();
+        });
+
+        var status = document.getElementById("jStatus");
+        function say(t) { if (status) status.textContent = t; }
+
+        document.getElementById("jDownload").addEventListener("click", function () {
+          try {
+            var url = URL.createObjectURL(fileBlob());
+            var a = document.createElement("a");
+            a.href = url; a.download = fileName();
+            document.body.appendChild(a); a.click(); document.body.removeChild(a);
+            setTimeout(function () { URL.revokeObjectURL(url); }, 4000);
+            say("Saved to your device. Check your downloads.");
+          } catch (err) { say("Sorry, the file could not be created on this device."); }
+        });
+
+        var sh = document.getElementById("jShare");
+        if (sh) {
+          sh.addEventListener("click", function () {
+            try {
+              var file = new File([fileBlob()], fileName(), { type: "text/plain" });
+              navigator.share({ files: [file], title: "My Phoenix Journal", text: "Heal. Rebuild. Rise." }).then(function () { say(""); }).catch(function (err) {
+                say(err && err.name === "AbortError" ? "" : "Sharing isn't available here. Try Download my journal instead.");
+              });
+            } catch (err) { say("Sharing isn't available here. Try Download my journal instead."); }
+          });
+        }
+
+        var em = document.getElementById("jEmail");
+        if (em) em.addEventListener("click", function () { this.setAttribute("href", mailtoFor()); });
+
+        bindFoot();
+      }
+
+      function openPanel() {
+        confirming = false;
+        panel.hidden = false;
+        openBtn.style.display = "none";
+        openBtn.setAttribute("aria-expanded", "true");
+        render();
+        panel.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      }
+
+      function closePanel() {
+        panel.hidden = true;
+        panel.innerHTML = "";
+        openBtn.style.display = "";
+        openBtn.setAttribute("aria-expanded", "false");
+        openBtn.focus();
+      }
+
+      openBtn.addEventListener("click", openPanel);
     })();
   </script>
 </body>
